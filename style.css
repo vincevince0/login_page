@@ -1,0 +1,101 @@
+.loginForm-btn
+{
+    margin:20px;
+    padding: 15px;
+    width: 125px;
+    border: 3px solid rgb(141, 168, 255);
+    border-radius: 6px;
+    background-color: rgb(43, 93, 255);
+    color: aliceblue;
+    font-size: medium;
+    font-weight: bolder;
+    transition-duration: 0s;
+}
+.loginForm-btn:hover
+{
+    background-color: rgb(141, 168, 255);
+    box-shadow: 0 0 4px 1px rgb(141, 168, 255);
+}
+.loginForm
+{
+    border: 3px solid rgb(255, 255, 255);
+    box-shadow: 0 0 12px 8px rgb(206, 206, 206);
+    border-radius: 6px;
+    margin: 0 auto; 
+    text-align: center;
+    padding: 20px;
+}
+.loginText
+{
+    font-weight: bolder;
+    font-size: 40px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    
+}
+.loginInput
+{
+    padding: 10px;
+    border: 1px solid rgb(212, 212, 212);
+    border-radius: 0;
+    margin: 3px;
+    width: 300px;
+}
+.loginInput:focus
+{
+    outline: none;
+}
+.forgotPassword-btn
+{
+    padding: 10px;
+    margin-top: 5px;
+    margin-right: 5px;
+    width: 150px;
+    background-color:rgb(43, 93, 255);
+    border: 3px solid rgb(43, 93, 255);
+    border-radius: 6px;
+    color: aliceblue;
+    font-size: 14px;
+    font-weight: bolder;
+}
+.forgotPassword-btn:hover
+{
+    background-color: rgb(43, 93, 255);
+    box-shadow: 0 0 4px 1px rgb(43, 93, 255);
+}
+.registration-btn
+{
+    padding: 10px;
+    margin-top: 5px;
+    width: 150px;
+    background-color:rgb(43, 93, 255);
+    border: 3px solid rgb(43, 93, 255);
+    border-radius: 6px;
+    color: aliceblue;
+    font-size: 14px;
+    font-weight: bolder;
+
+}
+.registration-btn:hover
+{
+    background-color: rgb(43, 93, 255);
+    box-shadow: 0 0 4px 1px rgb(43, 93, 255);
+}
+.login-btn
+{
+    padding: 10px;
+    margin-top: 5px;
+    margin-right: 5px;
+    width: 310px;
+    background-color:rgb(43, 93, 255);
+    border: 3px solid rgb(43, 93, 255);
+    border-radius: 6px;
+    color: aliceblue;
+    font-size: 14px;
+    font-weight: bolder;
+}
+.login-btn:hover
+{
+    background-color: rgb(43, 93, 255);
+    box-shadow: 0 0 4px 1px rgb(43, 93, 255);
+}
