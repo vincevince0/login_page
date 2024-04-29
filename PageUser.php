@@ -7,7 +7,7 @@
     <title>Logged In</title>
 </head>
 <body>
-<style>
+
 
 </body>
 </html>

@@ -9,10 +9,20 @@
 </head>
 <body>
 
-<form method="post">
-<button type="submit" class="loginForm-btn" name="loginForm-btn" id="loginForm-btn">Login Form</button>
-</form>
+
 <?php 
+
+
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+
+    echo '<form method="post">
+            <button type="submit" class="loginForm-btn" name="loginForm-btn" id="loginForm-btn">Login Form</button>
+          </form>';
 
     if (isset($_POST['loginForm-btn'])) {
         
@@ -43,20 +53,49 @@
 
     if(isset($_POST['forgotPassword-btn']))
     {
-        echo '';
+        echo '<input class="loginInput" type="text" placeholder="Email" required><br>
+              <form method="post">
+                    <button type="submit" class="finalizeRegistration-btn" name="newPass-btn" id="newPass-btn">Create New Password</button>
+              </form>';
     }
 
     if(isset($_POST['registration-btn']))
     {
-        echo '<input class="loginInput" type="email" placeholder="Name" required><br>
-              <input class="loginInput" type="text" placeholder="Email" required><br>
-              <input class="loginInput" type="password" placeholder="Password" required><br>
-              <input class="loginInput" type="password" placeholder="Password again" required>';
+        echo '<input class="loginInput" type="email" id="name" placeholder="Name" required><br>
+              <input class="loginInput" type="text" id="email" placeholder="Email" required><br>
+              <input class="loginInput" type="password" id="password1" placeholder="Password" required><br>
+              <input class="loginInput" type="password" id="password2" placeholder="Password again" required>
+              <form method="post">
+                    <button type="submit" class="finalizeRegistration-btn" name="finalizeRegistration-btn" id="finalizeRegistration-btn">Registration</button>
+              </form>';
     }
 
     if(isset($_POST['login-btn']))
     {
-        echo '';
+        echo 'Logged in successfully!';
+    }
+
+    if(isset($_POST['finalizeRegistration-btn']))
+    {
+        $mail = new PHPMailer();
+        //$token = $this->getNewToken();
+ 
+            $mail->isSMTP();                                            
+            $mail->Host       = 'localhost';                    
+            $mail->SMTPAuth   = false;                                  
+            $mail->Port       = 1025;                                
+           
+            $fullName = $vezNev." ".$kerNev;
+ 
+            $mail->setFrom('from@example.com', 'Mailer');
+            $mail->addAddress($email,$fullName);    
+       
+            $mail->isHTML(true);                                
+            $mail->Subject = 'Regisztráció';
+            $mail->Body    = 'A regisztráció véglegesítésének érdekében kattintson az alábbi linkre: <a href="http://localhost:8070/LoginPage/Page.php?registraion-token='.$token.'">';
+       
+            $mail->send();
+            //echo 'Message has been sent';
     }
 
 ?>

@@ -99,3 +99,21 @@
     background-color: rgb(43, 93, 255);
     box-shadow: 0 0 4px 1px rgb(43, 93, 255);
 }
+.finalizeRegistration-btn
+{
+    padding: 10px;
+    margin-top: 5px;
+    width: 150px;
+    background-color:rgb(43, 93, 255);
+    border: 3px solid rgb(43, 93, 255);
+    border-radius: 6px;
+    color: aliceblue;
+    font-size: 14px;
+    font-weight: bolder;
+
+}
+.finalizeRegistration-btn:hover
+{
+    background-color: rgb(43, 93, 255);
+    box-shadow: 0 0 4px 1px rgb(43, 93, 255);
+}
