@@ -113,9 +113,57 @@ function getNewToken()
         }
     }
 
-    function registration()
+    function keresEmail($email)
     {
-
+        $query = "SELECT * FROM user WHERE email = '$email'";
+ 
+        return $this->mysqli->query($query)->fetch_all(MYSQLI_ASSOC);
+    }
+ 
+    function Registraion($email,$fullName,$password,$token)
+    {
+        if (empty($this->keresEmail($email))) {
+            $created_at = date("Y-m-d H:i:s");
+            $jelenlegi_ido = time();
+            $hozzaadando_ido = 3600;
+            $uj_ido = $jelenlegi_ido + $hozzaadando_ido;
+ 
+            $jelzso = password_hash($password,PASSWORD_DEFAULT);
+ 
+            $token_valid_until= date("Y-m-d H:i:s",$uj_ido);
+            $query = "INSERT INTO user (is_active,name,email,password,token,token_valid_until,created_at) VALUES ('0','$fullName','$email','$jelzso','$token','$token_valid_until','$created_at')";
+           
+            if ($this->mysqli->query($query) == TRUE) {
+                echo "Kattinson az emailben kapott linkre a regisztráció véglegesítéséért!";
+            }
+            else {
+                echo " ";
+            }
+        }
+        else {
+            echo 'Ezzel az email cím már létezik 1 profil!';
+        }
+    }
+ 
+    function activateToken($token)
+    {
+       
+        $registered_at = date("Y-m-d H:i:s");
+        $token_valid_until = "SELECT token_valid_until FROM user WHERE token = '$token'";
+        if ($token_valid_until>=$registered_at) {
+            $query="UPDATE user SET is_active=1,registered_at='$registered_at' WHERE token ='$token' ";
+ 
+            if ($this->mysqli->query($query) == TRUE) {
+                echo "Sikeres regisztráció!";
+            }
+            else {
+                echo "Hiba az adatok feltöltése közben.". $this->mysqli->error;
+            }
+        }
+        else{
+            echo"lejárt az idő!";
+        }
+ 
     }
 
 ?>
