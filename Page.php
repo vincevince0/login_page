@@ -13,12 +13,19 @@
 <?php 
 
 
+require 'vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php';
+function getNewToken()
+{
+    $token = password_hash(time(), PASSWORD_DEFAULT);
+    return $token;
+}
+
+
 
     echo '<form method="post">
             <button type="submit" class="loginForm-btn" name="loginForm-btn" id="loginForm-btn">Login Form</button>
@@ -61,10 +68,13 @@ require 'vendor/autoload.php';
 
     if(isset($_POST['registration-btn']))
     {
-        echo '<input class="loginInput" type="email" id="name" placeholder="Name" required><br>
-              <input class="loginInput" type="text" id="email" placeholder="Email" required><br>
-              <input class="loginInput" type="password" id="password1" placeholder="Password" required><br>
-              <input class="loginInput" type="password" id="password2" placeholder="Password again" required>
+        echo '
+                <form method="post">
+                <input class="loginInput" type="text" id="name" name="name" placeholder="Name" required><br>
+                
+              <input class="loginInput" type="email" name="email" id="email" placeholder="Email" required><br>
+              <input class="loginInput" type="password" name="password1" id="password1" placeholder="Password" required><br>
+              <input class="loginInput" type="password" name="password2" id="password2" placeholder="Password again" required><br>
               <form method="post">
                     <button type="submit" class="finalizeRegistration-btn" name="finalizeRegistration-btn" id="finalizeRegistration-btn">Registration</button>
               </form>';
@@ -78,24 +88,34 @@ require 'vendor/autoload.php';
     if(isset($_POST['finalizeRegistration-btn']))
     {
         $mail = new PHPMailer();
-        //$token = $this->getNewToken();
+        $token = getNewToken();
  
             $mail->isSMTP();                                            
             $mail->Host       = 'localhost';                    
             $mail->SMTPAuth   = false;                                  
             $mail->Port       = 1025;                                
-           
-            $fullName = $vezNev." ".$kerNev;
  
             $mail->setFrom('from@example.com', 'Mailer');
-            $mail->addAddress($email,$fullName);    
+            $mail->addAddress($_POST['email'],$_POST['name']);
        
             $mail->isHTML(true);                                
             $mail->Subject = 'Regisztráció';
-            $mail->Body    = 'A regisztráció véglegesítésének érdekében kattintson az alábbi linkre: <a href="http://localhost:8070/LoginPage/Page.php?registraion-token='.$token.'">';
+            $mail->Body    = 'A regisztráció véglegesítésének érdekében kattintson az alábbi linkre: <a href="http://localhost:8070/LoginPage/Page.php?token='.$token.'">';
        
             $mail->send();
             //echo 'Message has been sent';
+    }
+
+    function getRequest()
+    {
+        if (isset($_GET[token])) {
+            $token = $_GET[token];
+        }
+    }
+
+    function registration()
+    {
+
     }
 
 ?>
